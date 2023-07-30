@@ -1,27 +1,30 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.18;
 
-contract Contract {
-    address public caller;
-    uint256 public value;
+contract VotingContract {
+    address public owner;
+    uint256 public totalVotes;
+    mapping(address => uint256) public votes;
 
     constructor() {
-        caller = msg.sender;
+        owner = msg.sender;
+        totalVotes = 0;
     }
 
-    function setValue(uint256 newValue) public {
+    function vote(uint256 numberOfVotes) public {
         // Use require to validate inputs or conditions
-        require(msg.sender == caller, "Only the owner can set the value.");
+        require(numberOfVotes > 0, "Number of votes must be greater than zero.");
 
         // Use revert to handle custom error messages
-        if (newValue > 500) {
-            revert("Value must be less than or equal to 500.");
+        if (votes[msg.sender] + numberOfVotes > 250) {
+            revert("You cannot cast more than 250  votes.");
         }
 
         // Use assert for internal errors that should never occur
-        assert(newValue >= 10 && newValue <= 500);
+        assert(totalVotes + numberOfVotes >= totalVotes);
 
-        value = newValue;
+        votes[msg.sender] += numberOfVotes;
+        totalVotes += numberOfVotes;
     }
+  
 }
-
