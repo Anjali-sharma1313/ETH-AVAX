@@ -18,14 +18,14 @@ Once you are on the  website, create a new file by clicking on the "file" icon i
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.18;
 
-    contract VotingContract {
+    contract Votingmachine {
     address public owner;
-    uint256 public totalVotes;
+    uint256 public votesinmachine;
     mapping(address => uint256) public votes;
 
     constructor() {
         owner = msg.sender;
-        totalVotes = 0;
+        votesinmachine = 0;
     }
 
     function vote(uint256 numberOfVotes) public {
@@ -38,14 +38,13 @@ pragma solidity ^0.8.18;
         }
 
         // Use assert for internal errors that should never occur
-        assert(totalVotes + numberOfVotes >= totalVotes);
+        assert(votesinmachine + numberOfVotes >= votesinmachine);
 
         votes[msg.sender] += numberOfVotes;
-        totalVotes += numberOfVotes;
+        votesinmachine += numberOfVotes;
     }
   
     }
-
 
 To compile the code, press CRTL+ SHIFT+P  then select Solidity compile contract and the program is compile sucessfully will be shown in console 
 ## Authors
